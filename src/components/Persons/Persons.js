@@ -12,11 +12,15 @@ class Persons extends Component {
     return null;
   }
 
-  shouldComponentUpdate(props,state){
-    console.log("[Persons.js] shouldComponentUpdate")
-    return true
+  shouldComponentUpdate(nextProps,nextState){
+    if(nextProps.persons !== this.props.persons){
+      return true
+    }
+    else{
+      return false
+    }
   }
-
+    
   getSnapshotBeforeUpdate(prevProps, prevState){
     console.log("[Persons.js] getSnapshotBeforeUpdate")
     return {message: "Hello World"}
@@ -38,6 +42,10 @@ class Persons extends Component {
   // componentWillUpdate(){
 
   // }
+
+  componentWillUnmount(){
+    console.log("[Persons.js] componentWillUnmount")
+  }
 
   render(){
   console.log('[Persons.js] rendering...');

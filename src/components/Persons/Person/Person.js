@@ -7,10 +7,10 @@ class Person extends Component{
     console.log("[Person.js] constructor")
   }
 
-  static getDerivedStateFromProps(props, state) {
-    console.log('[Person.js] getDerivedStateFromProps', props);
-    return null;
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('[Person.js] getDerivedStateFromProps', props);
+  //   return state;
+  // }
 
   componentDidMount() {
     console.log('[Person.js] componentDidMount');

@@ -1,47 +1,48 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 
 import classes from './Cockpit.css';
 
-class Cockpit extends Component{
-  constructor(props){
-    super(props)
-    console.log("[Cockpit.js] constructor")
-  }
+const cockpit = ( props ) => {
+    useEffect(()=>{
+      console.log("[Cockpit.js] useEffect")
+      const timer = setTimeout(()=>{
+        alert("Save data to the cloud")
+      }, 1000)
+      return()=>{
+        clearTimeout(timer)
+        console.log("[Cockpit.js] clean up code useEffect")
+      }
+    }, [])
 
-  static getDerivedStateFromProps(props, state) {
-    console.log('[Cockpit.js] getDerivedStateFromProps', props);
-    return null;
-  }
+    useEffect(()=>{
+      console.log("[Cockpit.js] 2nd useEffect")
+      return()=>{
+        console.log("[Cockpit.js] clean up code 2nd useEffect")
+      }
+    })
 
-  componentDidMount() {
-    console.log('[Cockpit.js] componentDidMount');
-  }
-
-  render(){
-  console.log("[Cockpit.js] rendering")
     const assignedClasses = [];
     let btnClass = '';
-    if (this.props.showPersons) {
+    if (props.showPersons) {
         btnClass = classes.Red;
     }
 
-    if ( this.props.persons.length <= 2 ) {
+    if ( props.persons.length <= 2 ) {
       assignedClasses.push( classes.red ); // classes = ['red']
     }
-    if ( this.props.persons.length <= 1 ) {
+    if ( props.persons.length <= 1 ) {
       assignedClasses.push( classes.bold ); // classes = ['red', 'bold']
     }
 
     return (
         <div className={classes.Cockpit}>
-            <h1>{this.props.title}</h1>
+            <h1>{props.title}</h1>
             <p className={assignedClasses.join( ' ' )}>This is really working!</p>
             <button
                 className={btnClass}
-                onClick={this.props.clicked}>Toggle Persons</button>
+                onClick={props.clicked}>Toggle Persons</button>
         </div>
     );
-}
-}
+};
 
-export default Cockpit;
+export default React.memo(cockpit);
